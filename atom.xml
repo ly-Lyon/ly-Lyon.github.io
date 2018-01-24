@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-01-02T03:19:42.477Z</updated>
+  <updated>2018-01-24T06:27:33.979Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2018/01/24/%E6%80%8E%E4%B9%88%E6%8A%8A%EF%BC%82%E6%BB%9A%E5%8A%A8%E6%9D%A1%EF%BC%82%E9%9A%90%E8%97%8F%EF%BC%9F/"/>
+    <id>http://yoursite.com/2018/01/24/怎么把＂滚动条＂隐藏？/</id>
+    <published>2018-01-24T06:27:33.842Z</published>
+    <updated>2018-01-24T06:27:33.979Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="怎么把滚动条隐藏？"><a href="#怎么把滚动条隐藏？" class="headerlink" title="怎么把滚动条隐藏？"></a>怎么把滚动条隐藏？</h1><p>作者：Yeefun<br>链接：<a href="https://juejin.im/post/5a6046dbf265da3e253c3534" target="_blank" rel="noopener">https://juejin.im/post/5a6046dbf265da3e253c3534</a><br>来源：掘金</p><p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。<br>只要网页内容大于视窗，滚动条就会出现。<br>一般来说，只要不是body层次的滚动条，那用<code>overflow:hidden;</code>就能解决滚动条出现的问题，但此时页面也会变得无法捲动。<br>目前网路上已经有诸多可隐藏非body层次的滚动条又可捲动页面的教学，所以本文主要聚焦于如何隐藏浏览器（也就是body层次）的滚动条。</p><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>针对不同的浏览器，有不同的隐藏滚动条的方法，以下针对三大浏览器 chrome、ie（包括 edge）、firefox 分别叙述之：</p><h2 id="Chorme"><a href="#Chorme" class="headerlink" title="Chorme"></a>Chorme</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">body::-webkit-scrollbar &#123;</span><br><span class="line">    display: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="IE-Edge"><a href="#IE-Edge" class="headerlink" title="IE/Edge"></a>IE/Edge</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">    -ms-overflow-style: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="Firefox"><a href="#Firefox" class="headerlink" title="Firefox"></a>Firefox</h2><p>firefox 是三者之中最麻烦的：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">html &#123;</span><br><span class="line">    overflow: -moz-hidden-unscrollable; /*注意！若只打 hidden，chrome 的其它 hidden 会出问题*/</span><br><span class="line">    height: 100%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">body &#123;</span><br><span class="line">height: 100%;</span><br><span class="line">width: calc(100vw + 18px); /*浏览器滚动条的长度大约是 18px*/</span><br><span class="line">overflow: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>到此还没结束，你还要在一些地方加上width: 100vw;。</p><p>假设你的HTML长这样：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;example-1&quot;&gt;</span><br><span class="line">        &lt;p&gt;难臺子哥式自不家草要计在来也见加正活书。&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;article id=&quot;example-2&quot;&gt;</span><br><span class="line">        &lt;h1&gt;意家的不称打准无政！&lt;/h1&gt;</span><br><span class="line">        &lt;p&gt;得研河金起里美希孩有人裡人。料低不。&lt;/p&gt;</span><br><span class="line">        &lt;button&gt;处拉&lt;/button&gt;</span><br><span class="line">    &lt;/article&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure><p>那你的CSS就还要再加上：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#example-1 &#123;</span><br><span class="line">    width: 100vw;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#example-2 &#123;</span><br><span class="line">    width: 100vw;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>综上所述，如果你想让三大浏览器的滚动条都隐藏，并且可以捲动，那你的CSS就至少要长这样：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">html &#123;</span><br><span class="line">    overflow: -moz-hidden-unscrollable;</span><br><span class="line">    height: 100%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">body::-webkit-scrollbar &#123;</span><br><span class="line">    display: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">body &#123;</span><br><span class="line">    -ms-overflow-style: none;</span><br><span class="line">    height: 100%;</span><br><span class="line">width: calc(100vw + 18px);</span><br><span class="line">overflow: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>至于width: 100vw;要加在何处，就要看你的HTML结构长怎样了。</p><h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>可以让读者更聚焦于内文，而不会看到滚动条很短就懒得看、跳出网页，或一心急，就把滚动条直直往下拉。换言之，就是强迫读者慢慢地把内容看完。</p><h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>假如读者想往回看，可能就会要滚很久。所以，如果你想为较长的内文隐藏滚动条，建议应有导览列，让读者可以快速跳到某一处。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;怎么把滚动条隐藏？&quot;&gt;&lt;a href=&quot;#怎么把滚动条隐藏？&quot; class=&quot;headerlink&quot; title=&quot;怎么把滚动条隐藏？&quot;&gt;&lt;/a&gt;怎么把滚动条隐藏？&lt;/h1&gt;&lt;p&gt;作者：Yeefun&lt;br&gt;链接：&lt;a href=&quot;https://juejin.im
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
